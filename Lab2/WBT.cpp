@@ -101,6 +101,16 @@ bool WBT::Search(int data, WBTNode* t)
 	return found;
 }
 
+void WBT::Print(WBTNode* r)
+{
+	if (r != null_node)
+	{
+		Print(r->left);
+		std::cout << r->data << " ";
+		Print(r->right);
+	}
+}
+
 WBT::WBT() : root(null_node) {}
 
 void WBT::Insert(int data, int weight)
@@ -124,3 +134,7 @@ bool WBT::Search(int data)
 	return Search(data, root);
 }
 
+void WBT::Print()
+{
+	Print(root);
+}

@@ -16,7 +16,7 @@ public:
 	//int GetData();
 };
 
-WBTNode* null_node;
+static WBTNode* null_node;
 
 class WBT
 {
@@ -30,12 +30,12 @@ private:
 	WBTNode* Insert(int data, int weight, WBTNode* t);
 	WBTNode* Remove(int data, WBTNode* t);
 	bool Search(int data, WBTNode* t);
+	void Print(WBTNode* r);
 public:
 	WBT();
 
 	void Insert(int data, int weight);
 	void Remove(int data);
 	bool Search(int data);
-
+	void Print();
 };
-
