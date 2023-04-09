@@ -7,10 +7,6 @@ WBTNode::WBTNode(int data, int weight)
 	WBTNode(data, weight, nullptr, nullptr);
 }
 
-//int WBTNode::GetData()
-//{
-//	return data;
-//}
 
 
 
@@ -35,7 +31,7 @@ WBTNode* WBT::RotateRight(WBTNode* t)
 	return tmp;
 }
 
-WBTNode* WBT::Insert(int data, int weight, WBTNode* t)
+WBTNode* WBT::Insert(int data, int weight, WBTNode*& t)
 {
 	if (t == null_node)
 		t = new WBTNode(data, weight, null_node, null_node);
