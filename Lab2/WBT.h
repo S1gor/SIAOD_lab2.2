@@ -26,6 +26,7 @@ private:
 	WBTNode* Remove(int data, WBTNode* t);
 	bool Search(int data, WBTNode* t);
 	void Print(WBTNode* r);
+	int Height(WBTNode* r);
 public:
 	WBT();
 
@@ -33,4 +34,5 @@ public:
 	void Remove(int data);
 	bool Search(int data);
 	void Print();
+	int Height();
 };

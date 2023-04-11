@@ -2,6 +2,12 @@
 целочисленных ключей с заданным показателем сбалансированности и определить его высоту.*/
 #include "WBT.h"
 
+/*			Example
+			 15(5)
+*		12(5)	  20(10)
+*	   8(3) 	    22(80)
+*/
+
 using namespace std;
 
 WBTNode* null_node;
@@ -12,7 +18,7 @@ int Choice()
 	do {
 		cout << "Enter your choice: ";
 		cin >> choice;
-	} while (choice > 4 || choice < 1);
+	} while (choice > 5 || choice < 1);
 	return choice;
 }
 
@@ -20,32 +26,32 @@ void LoopWBT()
 {
 	WBT wbt;
 	int data, weight;
-	cout << "Weight Balanced Tree operations:" << endl;
 	cout << "1. Insert " << endl;
 	cout << "2. Delete" << endl;
 	cout << "3. Search" << endl;
-	cout << "4. Exit" << endl;
+	cout << "4. Height" << endl;
+	cout << "5. Exit" << endl;
 	while (true)
 	{
 		switch (Choice())
 		{
 		case 1:
 		{
-			cout << "Enter integer element to insert: ";
+			cout << "Enter element to insert: ";
 			cin >> data;
-			cout << "Enter weight of the element in int: ";
+			cout << "Enter weight of the element: ";
 			cin >> weight;
 			wbt.Insert(data, weight);
 		} break;
 		case 2:
 		{
-			cout << "Enter integer element to delete: ";
+			cout << "Enter element to delete: ";
 			cin >> data;
 			wbt.Remove(data);
 		} break;
 		case 3:
 		{
-			cout << "Enter integer element to search: ";
+			cout << "Enter element to search: ";
 			cin >> data;
 			if (wbt.Search(data) == true)
 				cout << "Element " << data << " found in the tree" << endl;
@@ -53,6 +59,10 @@ void LoopWBT()
 				cout << "Element " << data << " not found in the tree" << endl;
 		} break;
 		case 4:
+		{
+			cout << "Heihgt: " << wbt.Height() << endl;
+		} break;
+		case 5:
 		{
 			exit(0);
 		}

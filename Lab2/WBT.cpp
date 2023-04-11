@@ -9,7 +9,6 @@ WBTNode::WBTNode(int data, int weight)
 
 
 
-
 bool WBT::IsEmpty()
 {
 	return root == null_node;
@@ -107,6 +106,18 @@ void WBT::Print(WBTNode* r)
 	}
 }
 
+int WBT::Height(WBTNode* r)
+{
+	if (r == null_node)
+		return 0;
+	else if (r->left == NULL && r->right == NULL)
+		return 0;
+	else if (Height(r->left) > Height(r->right))
+		return Height(r->left) + 1;
+	else
+		return Height(r->right) + 1;
+}
+
 WBT::WBT() : root(null_node) {}
 
 void WBT::Insert(int data, int weight)
@@ -121,7 +132,7 @@ void WBT::Remove(int data)
 	else
 	{
 		root = Remove(data, root);
-		std::cout << "Number " << data << "deleted from the tree" << std::endl;
+		std::cout << "Number " << data << " deleted from the tree" << std::endl;
 	}
 }
 
@@ -133,4 +144,9 @@ bool WBT::Search(int data)
 void WBT::Print()
 {
 	Print(root);
+}
+
+int WBT::Height()
+{
+	return Height(root);
 }
