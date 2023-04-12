@@ -39,9 +39,7 @@ void LoopWBT()
 		{
 			cout << "Enter element to insert: ";
 			cin >> data;
-			cout << "Enter weight of the element: ";
-			cin >> weight;
-			wbt.Insert(data, weight);
+			wbt.Insert(data);
 		} break;
 		case 2:
 		{
