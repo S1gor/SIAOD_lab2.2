@@ -152,179 +152,100 @@
 //}
 
 
-WBTNode::WBTNode(int data, int weight, WBTNode* left, WBTNode* right) : data(data), weight(weight), left(left), right(right) {}
-
-WBTNode::WBTNode(int data, int weight)
-{
-	WBTNode(data, weight, nullptr, nullptr);
-}
-
-
-
-bool WBT::IsEmpty()
-{
-	return root == null_node;
-}
-
-WBTNode* WBT::RotateLeft(WBTNode* r)
-{
-	WBTNode* tmp = r;
-	r = r->right;
-	tmp->right = r->left;
-	r->left = tmp;
-	r->weight = tmp->weight;
-	tmp->weight = tmp->left->weight + tmp->right->weight + 1;
-	return tmp;
-}
-
-WBTNode* WBT::RotateRight(WBTNode* r)
-{
-	WBTNode* tmp = r;
-	r = r->left;
-	tmp->left = r->right;
-	r->right = tmp;
-	r->weight = tmp->weight;
-	tmp->weight = tmp->left->weight + tmp->right->weight + 1;
-	return tmp;
-}
-
-WBTNode* WBT::CheckBalance(WBTNode* r)
-{
-	float wbal = (float)r->left->weight / (float)r->weight;
-	if (wbal > 0.70711 && r->left != null_node)
-	{
-		if ((float)r->left->left->weight / (float)r->left->weight > 0.414213)
-			r = RotateRight(r);
-		else
-		{
-			r->left = RotateLeft(r->left);
-			r = RotateRight(r);
-		}
-	}
-	else if (wbal < 0.29289 && r->right != null_node)
-	{
-		if ((float)(r->right->left->weight / (float)r->right->weight) < 0.585786)
-			r = RotateLeft(r);
-		else
-		{
-			r->right = RotateRight(r->right);
-			r = RotateLeft(r);
-		}
-	}
-	return r;
-}
-
-WBTNode* WBT::Insert(int data, WBTNode*& r)
-{
-	if (r == null_node)
-		r = new WBTNode(data, 1, null_node, null_node);
-	else if (data < r->data)
-		r->left = Insert(data, r->left);
-	else if (data > r->data)
-		r->right = Insert(data, r->right);
-
-	r->weight = r->left->weight + r->right->weight + 1;
-	return CheckBalance(r);
-}
-
-WBTNode* WBT::Remove(int data, WBTNode* r)
-{
-	if (r == null_node)
-		return r;
-	if (data < r->data)
-		r->left = Remove(data, r->left);
-	else if (data > r->data)
-		r->right = Remove(data, r->right);
-
-	else if (r->left == null_node)
-		r = r->right;
-	else if (r->right == null_node)
-		r = r->left;
-
-	else if (r->left->weight > r->right->weight)
-	{
-		r = RotateRight(r);
-		r->right = Remove(data, r->right);
-	}
-	else
-	{
-		r = RotateLeft(r);
-		r->left = Remove(data, r->left);
-	}
-
-	if (r != null_node)
-	{
-		r->weight = r->left->weight + r->right->weight + 1;
-		r = CheckBalance(r);
-	}
-	return r;
-}
-
-bool WBT::Search(int data, WBTNode* r)
-{
-	if (r == null_node)
-		return null_node;
-
-	if (r->data == data)
-		return root;
-
-	if (r->data < data)
-		return Search(data, r->right);
-
-	return Search(data, r->left);
-}
-
-void WBT::Print(WBTNode* r)
-{
-	if (r != null_node)
-	{
-		Print(r->left);
-		std::cout << r->data << " ";
-		Print(r->right);
-	}
-}
-
-int WBT::Height(WBTNode* r)
-{
-	if (r == null_node)
-		return 0;
-	else if (r->left == NULL && r->right == NULL)
-		return 0;
-	else if (Height(r->left) > Height(r->right))
-		return Height(r->left) + 1;
-	else
-		return Height(r->right) + 1;
-}
-
-WBT::WBT() : root(null_node) {}
-
-void WBT::Insert(int data)
-{
-	Insert(data, root);
-}
-
-void WBT::Remove(int data)
-{
-	if (IsEmpty())	std::cout << "Tree is empty!" << std::endl;
-	else if (Search(data) == false)	std::cout << "There is not number" << std::endl;
-	else
-	{
-		root = Remove(data, root);
-		std::cout << "Number " << data << " deleted from the tree" << std::endl;
-	}
-}
-
-bool WBT::Search(int data)
-{
-	return Search(data, root);
-}
-
-void WBT::Print()
-{
-	Print(root);
-}
-
-int WBT::Height()
-{
-	return Height(root);
-}
+//WBTNode::WBTNode(int data, int weight, WBTNode* left, WBTNode* right) : data(data), weight(weight), left(left), right(right) {}
+//
+//WBTNode::WBTNode(int data)
+//{
+//	WBTNode(data, 1, nullptr, nullptr);
+//}
+//
+//
+//
+//WBTNode* WBT::RotateLeft(WBTNode* r)
+//{
+//	WBTNode* tmp = r->right;
+//	r->right = tmp->left;
+//	tmp->left = r;
+//	r->weight = (r->left ? r->left->weight : 0) + (r->right ? r->right->weight : 0) + 1;
+//	tmp->weight = (tmp->left ? tmp->left->weight : 0) + (tmp->right ? tmp->right->weight : 0) + 1;
+//	return tmp;
+//}
+//
+//WBTNode* WBT::RotateRight(WBTNode* r)
+//{
+//	WBTNode* tmp = r->left;
+//	r->left = tmp->right;
+//	tmp->right = r;
+//	r->weight = (r->left ? r->left->weight : 0) + (r->right ? r->right->weight : 0) + 1;
+//	tmp->weight = (tmp->left ? tmp->left->weight : 0) + (tmp->right ? tmp->right->weight : 0) + 1;
+//	return tmp;
+//}
+//
+//WBTNode* WBT::CheckBalance(WBTNode* r)
+//{
+//	if (!r) return nullptr;
+//	int balance_factor = (r->left ? r->left->weight : 0) - (r->right ? r->right->weight : 0);
+//	if (balance_factor > 0.7) {
+//		if ((r->left->left ? r->left->left->weight : 0) < (r->left->right ? r->left->right->weight : 0)) {
+//			r->left = RotateLeft(r->left);	
+//		}
+//		r = RotateRight(r);
+//	}
+//	else if (balance_factor < 0.3) {
+//		if ((r->right->right ? r->right->right->weight : 0) < (r->right->left ? r->right->left->weight : 0)) {
+//			r->right = RotateRight(r->right);
+//		}
+//		r = RotateLeft(r);
+//	}
+//	return r;
+//}
+//
+//WBTNode* WBT::Insert(int data, WBTNode*& r) //!!!!!!!!!!!!!!!!!
+//{
+//	if (!r) return new WBTNode(data);
+//	if (data < r->data) {
+//		r->left = Insert(data, r->left);
+//	}
+//	else if (data > r->data) {
+//		r->right = Insert(data, r->right);
+//	}
+//	r->weight = (r->left ? r->left->weight : 0) + (r->right ? r->right->weight : 0) + 1;
+//	return CheckBalance(r);
+//}
+//
+//void WBT::Print(WBTNode* r)
+//{
+//	if (!r)	return;
+//	Print(r->left);
+//	std::cout << r->data << " ";
+//	Print(r->right);
+//}
+//
+//int WBT::Height(WBTNode* r)
+//{
+//	if (r == nullptr)
+//		return 0;
+//	else if (r->left == NULL && r->right == NULL)
+//		return 0;
+//	else if (Height(r->left) > Height(r->right))
+//		return Height(r->left) + 1;
+//	else
+//		return Height(r->right) + 1;
+//}
+//
+//WBT::WBT() : root(nullptr) {}
+//
+//void WBT::Insert(int data)
+//{
+//	Insert(data, root);
+//}
+//
+//void WBT::Print()
+//{
+//	Print(root);
+//}
+//
+//int WBT::Height()
+//{
+//	return Height(root);
+//}
