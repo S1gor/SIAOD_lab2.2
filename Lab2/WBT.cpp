@@ -25,7 +25,7 @@ WBTNode* WBT::RotateRight(WBTNode* r)
 WBTNode* WBT::CheckBalance(WBTNode* r)
 {
 	if (!r) return nullptr;
-	float balance = float(r->left ? r->left->weight : 0) - float(r->right ? r->right->weight : 0);
+	float balance = (float)(r->left ? r->left->weight : 0) / (float)(r->right ? r->right->weight : 0);
 	if (balance > 0.70711)
 	{
 		if ((r->left->left ? r->left->left->weight : 0) < (r->left->right ? r->left->right->weight : 0))
